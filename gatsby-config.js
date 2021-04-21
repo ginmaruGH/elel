@@ -3,6 +3,7 @@ module.exports = {
     title: `Elementary Elementary`,
     description: `Web関連の公開学習ノート`,
     lang: `ja`,
+    siteUrl: `https://elel-jp.com`
   },
   plugins: [
     `gatsby-plugin-sass`,
