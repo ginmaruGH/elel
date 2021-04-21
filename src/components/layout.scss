@@ -1,0 +1,567 @@
+@charset "UTF-8";
+
+/* 基本 */
+body {
+  font-family: sans-serif;
+  color: #222;
+}
+
+.container {
+  width: 84%;
+  max-width: 1147px;
+  margin: 0 auto;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+.site img {
+  width: auto;
+  max-width: 100%;
+}
+
+svg {
+  vertical-align: bottom;
+}
+
+.nav,
+.catch h1,
+.food h2,
+.detail p:first-of-type,
+.info .subtitle {
+  font-family: "Avenir Next", "Segoe UI", Helvetica, sans-serif;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* ヘッダー */
+.header .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 134px;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+  }
+}
+.nav {
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin-top: 18px;
+    color: #477294;
+
+    @media (min-width: 768px) {
+      margin-top: 0;
+    }
+  }
+  li:not(:last-child) {
+    margin-right: 55px;
+  }
+}
+
+/* ヒーロー */
+.hero {
+  position: relative;
+
+  figure {
+    max-width: 100%;
+    height: 450px;
+
+    @media (min-width: 768px) {
+      height: 750px;
+    }
+    img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+
+      @media (min-width: 768px) {
+        height: 750px;
+      }
+    }
+  }
+  .catch {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto auto 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+
+      @media (min-width: 768px) {
+        font-size: 40px;
+        margin-bottom: 30px;
+      }
+      @media (min-width: 900px) {
+        font-size: 56px;
+        margin-bottom: 30px;
+      }
+    }
+    p {
+      font-size: 10px;
+
+      @media (min-width: 768px) {
+        font-size: 16px;
+      }
+      @media (min-width: 900px) {
+        font-size: 24px;
+      }
+    }
+  }
+  .wave {
+    position: absolute;
+    right: 0;
+    bottom: -10px;
+    left: 0;
+    margin: auto;
+    width: 100%;
+  }
+}
+
+/* フード */
+.food {
+  padding: 30px 0;
+  text-align: center;
+
+  h2 {
+    color: #477294;
+    margin-bottom: 20px;
+
+    span {
+      font-weight: normal;
+    }
+  }
+}
+
+/* フード詳細 */
+.details {
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.detail {
+  margin-bottom: 50px;
+
+  @media (min-width: 768px) {
+    width: 31.5%;
+  }
+  figure {
+    max-width: 320px;
+    margin: auto;
+  }
+  h3 {
+    margin-bottom: 16px;
+    font-size: 30px;
+  }
+  p:first-of-type {
+    margin-bottom: 30px;
+    color: #477294;
+    font-size: 19px;
+  }
+  p:last-of-type {
+    font-size: 14px;
+    line-height: 1.8;
+
+    @media (min-width: 768px) {
+      font-size: 11px;
+    }
+    @media (min-width: 950px) {
+      font-size: 14px;
+    }
+  }
+}
+
+/* 見出しの装飾 */
+.bar {
+  padding-bottom: 16px;
+  position: relative;
+
+  @media (min-width: 768px) {
+    max-width: 375px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &::before,
+  &::after {
+    display: block;
+    content: "";
+    background-color: #0facde;
+    width: 80%;
+    height: 1px;
+    position: absolute;
+
+    @media (min-width: 768px) {
+      width: 73%;
+    }
+  }
+  &::before {
+    left: 0;
+    bottom: 6px;
+
+    @media (min-width: 768px) {
+      width: 312px;
+    }
+  }
+  &::after {
+    right: 0;
+    bottom: 0;
+
+    @media (min-width: 768px) {
+      width: 81%;
+    }
+  }
+}
+.content {
+  .bar {
+    @media (min-width: 768px) {
+      max-width: none;
+    }
+    &::before {
+      width: 200px;
+
+      @media (min-width: 768px) {
+        width: 312px;
+      }
+    }
+    &::after {
+      @media (min-width: 768px) {
+        width: 81%;
+      }
+    }
+  }
+}
+
+/* フォト */
+.photo {
+
+  figure {
+    max-width: 100%;
+    height: 170px;
+
+    @media (min-width: 768px) {
+      height: 367px;
+    }
+    img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+
+      @media (min-width: 768px) {
+        height: 367px;
+      }
+    }
+  }
+}
+
+/* フッター */
+/* 背景画像(.back) */
+.footer {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  color: #fff;
+  // background-image: url(/images/pattern.jpg);
+  background-image: none;
+  background-size: cover;
+  background-color: #477294;
+
+  @media (min-width: 768px) {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+  .container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .site {
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: left;
+    }
+    p {
+      margin-top: 20px;
+      margin-bottom: 50px;
+      font-size: 14px;
+
+      @media (min-width: 768px) {
+        margin-top: 10px;
+        margin-bottom: 0;
+        font-size: 18px;
+      }
+    }
+  }
+  .back {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+
+/* SNSメニュー */
+.sns {
+  display: flex;
+  list-style: none;
+  font-size: 40px;
+
+  li:not(:last-child) {
+    margin-right: 30px;
+  }
+}
+
+/* コンテンツ */
+.content {
+  padding-top: 50px;
+  padding-bottom: 40px;
+
+  @media (min-width: 768px) {
+    padding-top: 70px;
+		padding-bottom: 60px;
+  }
+  .container {
+    max-width: 785px;
+  }
+  h1 {
+    margin-bottom: 25px;
+    font-size: 24px;
+
+    @media (min-width: 768px) {
+      margin-bottom: 40px;
+      font-size: 38px;
+    }
+  }
+}
+.postbody {
+  > * {
+    margin-bottom: 2em;
+  }
+  h2 {
+    margin-top: 2.5em;
+    margin-bottom: 1.5em;
+    font-size: 20px;
+
+    [class*="fa-"] {
+      margin-right: 15px;
+      color: #477294;
+
+      @media (min-width: 768px) {
+        font-size: 28px;
+      }
+    }
+  }
+  p {
+    line-height: 1.8;
+  }
+  ul {
+    padding-left: 30px;
+  }
+  li:not(:last-child) {
+    margin-bottom: 1em;
+  }
+}
+
+/* コンテンツの情報 */
+.info {
+  margin-bottom: 43px;
+  color: #477294;
+  font-size: 14px;
+
+  [class*="fa-"] {
+    margin-right: 10px;
+  }
+}
+
+/*
+#################################
+ブログ
+#################################
+*/
+
+/* ブログ記事の情報 */
+.info {
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+  }
+  time {
+    margin-bottom: 5px;
+  }
+  .cat {
+    ul {
+      list-style: none;
+      display: inline-flex;
+    }
+    li:not(:last-child)::after {
+      content: "・";
+      margin: 0 5px;
+    }
+  }
+}
+
+/* 前後の記事へのリンク */
+.postlink {
+  margin-top: 4em;
+  list-style: none;
+  color: #477294;
+  font-size: 14px;
+  display: flex;
+
+  li {
+    width: 48%;
+    display: flex;
+    align-items: center;
+  }
+  a {
+    display: flex;
+    align-items: center;
+  }
+  .next {
+    margin-left: auto;
+    justify-content: flex-end;
+
+    [class*="fa-"] {
+      margin-left: 10px;
+    }
+  }
+  .prev [class*="fa-"] {
+    margin-right: 10px;
+  }
+}
+
+/* ブログ記事一覧ページ */
+.bloglist {
+
+  .container {
+    max-width: 1000px;
+  }
+  .posts {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
+/* ブログ記事一覧 */
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+  article {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+  img {
+    height: 150px;
+    object-fit: cover;
+
+    @media (min-width: 768px) {
+      height: 200px;
+    }
+  }
+  h3 {
+    margin-top: 10px;
+    font-size: 14px;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+}
+
+/* ページネーション */
+.pagenation {
+  margin-top: 1.8em;
+  list-style: none;
+  display: flex;
+
+  .next {
+    margin-left: auto;
+    a {
+      justify-content: flex-end;
+    }
+  }
+  a {
+    width: 7em;
+    padding: 0.5em 1em;
+    border-radius: 1em;
+    background-color: #477294;
+    color: #fff;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+  .prev [class*="fa-"] {
+    margin-right: 10px;
+  }
+  .next [class*="fa-"] {
+    margin-left: 10px;
+  }
+}

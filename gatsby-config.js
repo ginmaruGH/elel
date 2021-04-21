@@ -1,6 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `Elementary Elementary`,
+    description: `Web関連の公開学習ノート`,
+    lang: `ja`,
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -14,5 +16,6 @@ module.exports = {
         path: `${__dirname}/src/images/`
       },
     },
+    `gatsby-plugin-react-helmet`,
   ],
 };
