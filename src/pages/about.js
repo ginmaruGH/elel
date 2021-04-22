@@ -2,25 +2,28 @@ import React from "react";
 import { graphql } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
-import Layout from "../components/layout";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
+import Layout from "../components/layout";
 import Seo from "../components/seo";
 
 const About = ({ data, location }) => {
   return (
-    <>
+
       <Layout>
         <Seo
           pagetitle="Elementary Elementary について"
           pagedesc="WebにもPCにも不慣れなおっさんの暗中模索の記録 (^ ^);"
           pagepath={location.pathname}
+          pageimg={data.about.childImageSharp.original.src}
+          pageimgw={data.about.childImageSharp.original.width}
+          pageimgh={data.about.childImageSharp.original.height}
         />
         <div className="eyecatch">
           <figure>
             <GatsbyImage
-              image={data.about.childImageSharp.gatsbyImageDate}
+              image={data.about.childImageSharp.gatsbyImageData}
               alt="ブルーベリー＆ヨーグルト"
             />
           </figure>
@@ -73,18 +76,23 @@ const About = ({ data, location }) => {
           </div>
         </article>
       </Layout>
-    </>
+
   );
 };
-
-export default About;
 
 export const query = graphql`
   query {
     about: file(relativePath: { eq: "about.jpg" }) {
       childImageSharp {
+        original {
+          src
+          width
+          height
+        }
         gatsbyImageData(layout: FULL_WIDTH)
       }
     }
   }
 `;
+
+export default About;
