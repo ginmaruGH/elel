@@ -62,7 +62,7 @@ const Seo = ( props ) => {
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
     </>
-  )
+  );
 }
 
 export default Seo
