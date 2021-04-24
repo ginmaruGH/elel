@@ -1,5 +1,5 @@
-const { createFilePath } = require("gatsby-source-filesystem")
 const path = require( "path" )
+const { createFilePath } = require("gatsby-source-filesystem")
 
 // ======================================================================================
 // Slug
@@ -7,6 +7,7 @@ const path = require( "path" )
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
+
   if (node.internal.type === `MarkdownRemark`) {
     const slug = createFilePath({ node, getNode, basePath: `pages` })
     createNodeField({
@@ -17,10 +18,15 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 }
 
+// ======================================================================================
+// Page, Blog,
+// ======================================================================================
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const article = path.resolve("./src/templates/article.js")
+  const page = path.resolve("./src/templates/page.js")
+  const blog = path.resolve("./src/templates/blog.js")
 
   const result = await graphql(`
     query {
@@ -57,14 +63,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  // ====================================================================================
+  // ------------------------------------------------------------------------------------
   // Page
-  // ====================================================================================
+  // ------------------------------------------------------------------------------------
 
   result.data.allMarkdownRemark.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: `/blog/pages${node.fields.slug}`,
-      component: article,
+      component: page,
       context: {
         id: node.id,
         next,
@@ -73,3 +79,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 }
+
+// --------------------------------------------------------------------------------------
+// Blog
+// --------------------------------------------------------------------------------------
+
+

@@ -1,8 +1,8 @@
-import React from "react"
-import { Helmet } from "react-helmet"
-import { useStaticQuery, graphql } from "gatsby"
+import React from "react";
+import { Helmet } from "react-helmet";
+import { useStaticQuery, graphql } from "gatsby";
 
-const Seo = ( props ) => {
+const Seo = ({ pageSEO }) => {
   const data = useStaticQuery(graphql`
     query {
       site {
@@ -12,58 +12,56 @@ const Seo = ( props ) => {
           description
           siteUrl
           locale
-          fbappid
+          fbAppID
         }
       }
     }
-  `)
+  `);
 
-  const title = props.pagetitle
-    ? `${props.pagetitle} | ${data.site.siteMetadata.title}`
-    : data.site.siteMetadata.title
+  const configMeta = data.site.siteMetadata;
 
-  const description = props.pagedesc || data.site.siteMetadata.description;
-
-  const url = props.pagepath
-    ? `${data.site.siteMetadata.siteUrl}${props.pagepath}`
-    : data.site.siteMetadata.siteUrl
-
-  const imgurl = props.pageimg
-    ? `${data.site.siteMetadata.siteUrl}${props.pageimg}`
-    : `${data.site.siteMetadata.siteUrl}/thumb.jpg`
-
-  const imgw = props.pageimgw || 1280
-
-  const imgh = props.pageimgh || 640
+  let url;
+  if (pageSEO.pagePath) {
+    url = `${configMeta.siteUrl}${pageSEO.pagePath}`;
+  } else {
+    url = configMeta.siteUrl;
+  }
+  let title;
+  if (pageSEO.pageTitle) {
+    title = `${pageSEO.pageTitle} | ${configMeta.title}`;
+  } else {
+    title = configMeta.title;
+  }
+  let imgUrl;
+  if (pageSEO.pageImgSrc) {
+    imgUrl = `${configMeta.siteUrl}${pageSEO.pageImgSrc}`;
+  } else {
+    imgUrl = `${configMeta.siteUrl}/thumb.jpg`;
+  }
+  const description = pageSEO.pageDesc || configMeta.description;
+  const imgWidth = pageSEO.pageImgWidth || 1280;
+  const imgHeight = pageSEO.pageImgHeight || 640;
 
   return (
-    <>
-      <Helmet>
-        <html lang={data.site.siteMetadata.lang} />
-        <title>{title}</title>
-        <meta name="description" content={description} />
+    <Helmet>
+      <html lang={configMeta.lang} />
+      <title>{title}</title>
+      <link rel="canonical" href={url} />
+      <meta name="description" content={description} />
 
-        <link rel="canonical" href={url} />
-
-        <meta property="og:site_name" content={data.site.siteMetadata.title} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:url" content={url} />
-        <meta property="og:type" content="website" />
-        <meta property="og:locale" content={data.site.siteMetadata.locale} />
-        <meta
-          property="og:fb:app_id"
-          content={data.site.siteMetadata.fbappid}
-        />
-
-        <meta property="og:image" content={imgurl} />
-        <meta property="og:image:width" content={imgw} />
-        <meta property="og:image:height" content={imgh} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Helmet>
-    </>
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content={configMeta.locale} />
+      <meta property="og:site_name" content={configMeta.title} />
+      <meta property="og:fb:app_id" content={configMeta.fbAppID} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={url} />
+      <meta property="og:image" content={imgUrl} />
+      <meta property="og:image:width" content={imgWidth} />
+      <meta property="og:image:height" content={imgHeight} />
+      <meta name="twitter:card" content="summary_large_image" />
+    </Helmet>
   );
-}
+};
 
-export default Seo
-
+export default Seo;

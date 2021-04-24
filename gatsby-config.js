@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: `Elementary Elementary`,
-    description: `Web関連の公開学習ノート`,
     lang: `ja`,
     locale: `ja_JP`,
+    title: `Elementary Elementary`,
+    description: `Web関連の公開学習ノート`,
     siteUrl: `https://elel-jp.com`,
-    fbappid: `xxxxxxxxxxxxxxxxxxxxx`,
+    fbAppID: `xxxxxxxxxxxxxxxxxxxxx`,
   },
   plugins: [
     // ==================================================================================

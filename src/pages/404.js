@@ -15,5 +15,4 @@ const NotFoundPage = ({ location }) => {
     </Layout>
   )
 }
-
 export default NotFoundPage
