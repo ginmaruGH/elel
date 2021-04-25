@@ -4,7 +4,7 @@ modDate: 2019-11-27
 title: どうしても甘いものが欲しくなるとき
 description: 甘いマカロン
 thumbnail: "./taste.jpg"
-tags: ["beverage", Grain]
+tags: ["Beverage", Grain]
 ---
 
 ダイエットなどをしていても、どうしても甘いものを欲しくなるときがあります。どうしても、背徳感に溢れる食べ物が欲しくなるのです。本当に変な感じです。

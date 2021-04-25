@@ -19,14 +19,14 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 }
 
 // ======================================================================================
-// Page, Blog,
+// Post-page, Tag-page,
 // ======================================================================================
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  const page = path.resolve("./src/templates/page.js")
-  const blog = path.resolve("./src/templates/blog.js")
+  const postPage = path.resolve("./src/templates/post-page.js")
+  const tagPage = path.resolve("./src/templates/tag-page.js")
 
   const result = await graphql(`
     query {
@@ -55,33 +55,61 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+        tagsGroup: group(field: frontmatter___tags) {
+          fieldValue
+        }
       }
     }
   `);
   if (result.errors) {
-    reporter.panicOnBuild(`GraphQLのクエリーでエラーが発生！`)
+    reporter.panicOnBuild(`GraphQLクエリー実行中にエラーが発生！＞＜；`)
     return
   }
 
   // ------------------------------------------------------------------------------------
-  // Page
+  // Post-page
   // ------------------------------------------------------------------------------------
-
+  // oder:DESC(new ->(previous <- current -> next)-> old)
   result.data.allMarkdownRemark.edges.forEach(({ node, next, previous }) => {
     createPage({
       path: `/blog/pages${node.fields.slug}`,
-      component: page,
+      component: postPage,
       context: {
         id: node.id,
-        next,
-        previous,
+        next: previous,
+        previous: next,
       },
-    })
+    });
   })
+
+  // --------------------------------------------------------------------------------------
+  // Tags-page
+  // --------------------------------------------------------------------------------------
+
+  const tags = result.data.allMarkdownRemark.tagsGroup;
+
+  tags.forEach(( tag ) => {
+    createPage({
+      path: `/tags/${slugify(tag.fieldValue)}/`,
+      component: tagPage,
+      context: {
+        tag: tag.fieldValue,
+      },
+    });
+  })
+
+} //exports.createPages
+
+
+// Helpers
+function slugify(str) {
+  return (
+    str &&
+    str
+      .match(
+        /[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g
+      )
+      .map((x) => x.toLowerCase())
+      .join('-')
+  )
 }
-
-// --------------------------------------------------------------------------------------
-// Blog
-// --------------------------------------------------------------------------------------
-
-

@@ -1,5 +1,5 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 
 import Layout from "../components/layout";
@@ -102,6 +102,30 @@ const Home = ({ data }) => {
           />
         </figure>
       </section>
+      <section className="content bloglist">
+        <div className="container">
+          <h2 className="sr-only">RECENT POSTS</h2>
+
+          <div className="posts">
+            {data.allMarkdownRemark.edges.map(({ node }) => (
+              <article className="post" key={node.id}>
+                <Link to={`/blog/pages${node.fields.slug}`}>
+                  <figure>
+                    <GatsbyImage
+                      image={
+                        node.frontmatter.thumbnail.childImageSharp.gatsbyImageData
+                      }
+                      alt={node.frontmatter.description}
+                      style={{ height: "100%" }}
+                    />
+                  </figure>
+                  <h3>{node.frontmatter.title}</h3>
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
     </Layout>
   );
 };
@@ -139,17 +163,20 @@ export const query = graphql`
       skip: 0
       limit: 6
     ) {
-      nodes {
-        id
-        fields {
-          slug
-        }
-        frontmatter {
-          title
-          description
-          thumbnail {
-            childImageSharp {
-              gatsbyImageData(layout: CONSTRAINED, width: 500)
+      edges {
+        node {
+          id
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            description
+            tags
+            thumbnail {
+              childImageSharp {
+                gatsbyImageData(width: 573, layout: CONSTRAINED)
+              }
             }
           }
         }

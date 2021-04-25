@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
+import { slugify } from "../utils/helpers";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,19 +30,19 @@ const pageTemplate = ({ data, pageContext, location }) => {
   const thumbnailAlt = frontmatter.description;
 
   let prev = {};
-  if (pageContext.next) {
+  if (pageContext.previous) {
     prev = {
-      link: `/blog/pages${pageContext.next.fields.slug}`,
-      title: pageContext.next.frontmatter.title,
+      link: `/blog/pages${pageContext.previous.fields.slug}`,
+      title: pageContext.previous.frontmatter.title,
     };
   } else {
     prev = null;
   }
   let next = {};
-  if (pageContext.previous) {
+  if (pageContext.next) {
     next = {
-      link: `/blog/pages${pageContext.previous.fields.slug}`,
-      title: pageContext.previous.frontmatter.title,
+      link: `/blog/pages${pageContext.next.fields.slug}`,
+      title: pageContext.next.frontmatter.title,
     };
   } else {
     next = null;
@@ -82,7 +83,9 @@ const pageTemplate = ({ data, pageContext, location }) => {
               <ul>
                 {frontmatter.tags.map((tag) => (
                   <li className={tag} key={tag}>
+                    <Link to={`/tags/${slugify(tag)}/`}>
                     {tag}
+                    </Link>
                   </li>
                 ))}
               </ul>
